@@ -25,8 +25,7 @@ services:
       corepack prepare pnpm@9.15.9 --activate &&
       pnpm install --frozen-lockfile &&
       pnpm --filter @mem/api build
-    preDeployCommand: pnpm --filter @mem/api db:deploy
-    startCommand: pnpm --filter @mem/api start
+    startCommand: pnpm --filter @mem/api start:render
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV

@@ -38,13 +38,13 @@ Blueprint가 `CORS_ORIGIN`, `FRONTEND_URL`은 비워 둡니다. **mem-api → En
 
 ## 2. DB·시드
 
-`render.yaml`의 `preDeployCommand`가 매 배포마다 실행합니다:
+Free tier는 `preDeployCommand`를 지원하지 않습니다. 대신 **mem-api 시작 시** 스키마 반영·시드가 실행됩니다 (`start:render`).
 
 ```bash
-pnpm --filter @mem/api db:deploy   # prisma db push + seed
+prisma db push && tsx prisma/seed.ts && node dist/main.js
 ```
 
-시드는 upsert라 재실행해도 안전합니다.
+시드는 upsert라 재시작·재배포해도 안전합니다.
 
 ### 데모 로그인
 
@@ -77,7 +77,7 @@ pnpm --filter @mem/api db:deploy   # prisma db push + seed
 | 증상 | 확인 |
 |------|------|
 | 로그인 후 바로 로그아웃 | `JWT_SECRET` Web·API 동일한지, `mem-shared` 그룹 연결 여부 |
-| API 502 / 타임아웃 | mem-api 로그, DB `DATABASE_URL`, `preDeployCommand` 성공 여부 |
+| API 502 / 타임아웃 | mem-api 로그, DB `DATABASE_URL`, 시작 시 `db push`/seed 성공 여부 |
 | 모니터링 실시간 안 됨 | `/mem-api/monitoring/stream` — mem-api 가동·로그인 세션 |
 | 이미지 안 보임 (시드) | Web 로그, `docs/seed/images` 경로 |
 | 초대 링크 깨짐 | `FRONTEND_URL` = mem-web URL |
