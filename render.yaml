@@ -1,5 +1,6 @@
 # MEM demo/staging on Render — https://render.com/docs/blueprint-spec
-# Deploy: Dashboard → New → Blueprint → connect dolby527/mem repo
+# Free tier: Postgres는 계정당 1개 — Blueprint에서 DB를 만들지 않음.
+# 배포 전 Dashboard에서 Postgres 1개 생성 후 DATABASE_URL을 mem-api에 설정.
 # Docs: docs/deploy/RENDER.md
 
 envVarGroups:
@@ -7,12 +8,6 @@ envVarGroups:
     envVars:
       - key: JWT_SECRET
         generateValue: true
-
-databases:
-  - name: mem-db
-    plan: free
-    databaseName: mem
-    user: mem
 
 services:
   - type: web
@@ -31,9 +26,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        fromDatabase:
-          name: mem-db
-          property: connectionString
+        sync: false
       - fromGroup: mem-shared
       - key: HEALTH_CHECK_SIMULATE
         value: "true"
