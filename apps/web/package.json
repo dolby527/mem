@@ -5,7 +5,7 @@
   "scripts": {
     "tokens": "node scripts/generate-design-tokens.mjs",
     "dev": "pnpm tokens && node --env-file=env/.env.development ./node_modules/next/dist/bin/next dev --port 3000",
-    "build": "pnpm tokens && node --env-file=env/.env.development ./node_modules/next/dist/bin/next build",
+    "build": "pnpm tokens && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

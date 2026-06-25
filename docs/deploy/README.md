@@ -1,7 +1,6 @@
 # MEM 배포
 
-MEM은 **AWS EC2**와 **온프레미스(병원 내부망)** 배포를 모두 지원합니다.
-Render 등 managed PaaS는 현재 범위에 포함하지 않습니다.
+MEM은 **AWS EC2**, **온프레미스(병원 내부망)**, **Render(데모/스테이징)** 배포를 지원합니다.
 
 ## 공통 요구사항
 
@@ -16,6 +15,7 @@ Render 등 managed PaaS는 현재 범위에 포함하지 않습니다.
 
 | 문서 | 환경 | 요약 |
 |------|------|------|
+| [RENDER.md](./RENDER.md) | Render | 데모 URL, Blueprint `render.yaml`, 시드·시뮬레이션 헬스체크 |
 | [EC2.md](./EC2.md) | AWS EC2 | VPC, ALB, RDS, systemd 또는 Docker |
 | [ON-PREMISE.md](./ON-PREMISE.md) | 병원 내부망 | VPN, 에이전트, 리버스 프록시, air-gap 고려 |
 
@@ -44,5 +44,6 @@ Render 등 managed PaaS는 현재 범위에 포함하지 않습니다.
 | 파일 | 상태 |
 |------|------|
 | README.md | 확정 (플랫폼 선택) |
+| RENDER.md | 데모 Blueprint (`render.yaml`) |
 | EC2.md | 골격 (구현·인프라 확정 후 상세화) |
 | ON-PREMISE.md | 골격 (VPN·에이전트 확정 후 상세화) |

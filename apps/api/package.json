@@ -13,6 +13,7 @@
     "db:migrate": "node --env-file=env/.env.development ./node_modules/prisma/build/index.js migrate dev",
     "db:push": "node --env-file=env/.env.development ./node_modules/prisma/build/index.js db push",
     "db:seed": "node --env-file=env/.env.development ./node_modules/prisma/build/index.js db seed",
+    "db:deploy": "prisma db push && tsx prisma/seed.ts",
     "db:studio": "node --env-file=env/.env.development ./node_modules/prisma/build/index.js studio",
     "sim:protocol": "node --env-file=env/.env.development node_modules/tsx/dist/cli.mjs scripts/simulate-protocol-events.ts"
   },

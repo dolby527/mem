@@ -1,5 +1,22 @@
+/** Same-origin API proxy prefix (Render / split-host deploy). */
+export const API_PROXY_PREFIX = "/mem-api";
+
+function trimTrailingSlash(url: string): string {
+  return url.replace(/\/$/, "");
+}
+
 export function getApiBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+  const publicUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
+  const internalUrl = process.env.API_INTERNAL_URL?.trim();
+
+  if (typeof window !== "undefined") {
+    if (publicUrl) return trimTrailingSlash(publicUrl);
+    return API_PROXY_PREFIX;
+  }
+
+  if (internalUrl) return trimTrailingSlash(internalUrl);
+  if (publicUrl) return trimTrailingSlash(publicUrl);
+  return "http://localhost:3001";
 }
 
 /** PLATFORM_ADMIN 병원 전환; 일반 사용자는 세션 병원 slug */

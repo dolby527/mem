@@ -10,12 +10,15 @@ import { MaintenanceModule } from "./maintenance/maintenance.module";
 import { MonitoringModule } from "./monitoring/monitoring.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { UsersModule } from "./users/users.module";
+import { HealthController } from "./health.controller";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      ignoreEnvFile: process.env.NODE_ENV === "production",
       envFilePath: [
+        join(process.cwd(), "env/.env.production"),
         join(process.cwd(), "env/.env.development"),
         join(process.cwd(), "env/.env"),
       ],
@@ -30,5 +33,6 @@ import { UsersModule } from "./users/users.module";
     MaintenanceModule,
     MonitoringModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}

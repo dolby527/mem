@@ -7,6 +7,7 @@ function isFrameworkOrApiPath(pathname: string): boolean {
   return (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/mem-api") ||
     pathname === "/favicon.ico"
   );
 }
@@ -54,5 +55,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|mem-api|_next/static|_next/image|favicon.ico).*)"],
 };

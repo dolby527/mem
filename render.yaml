@@ -1,0 +1,72 @@
+# MEM demo/staging on Render — https://render.com/docs/blueprint-spec
+# Deploy: Dashboard → New → Blueprint → connect dolby527/mem repo
+# Docs: docs/deploy/RENDER.md
+
+envVarGroups:
+  - name: mem-shared
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: mem-db
+    plan: free
+    databaseName: mem
+    user: mem
+
+services:
+  - type: web
+    name: mem-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: >-
+      corepack enable &&
+      corepack prepare pnpm@9.15.9 --activate &&
+      pnpm install --frozen-lockfile &&
+      pnpm --filter @mem/api build
+    preDeployCommand: pnpm --filter @mem/api db:deploy
+    startCommand: pnpm --filter @mem/api start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mem-db
+          property: connectionString
+      - fromGroup: mem-shared
+      - key: HEALTH_CHECK_SIMULATE
+        value: "true"
+      - key: COOKIE_DOMAIN
+        value: local
+      # After first deploy, set to mem-web URL (Dashboard → mem-api → Environment)
+      - key: CORS_ORIGIN
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+
+  - type: web
+    name: mem-web
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: >-
+      corepack enable &&
+      corepack prepare pnpm@9.15.9 --activate &&
+      pnpm install --frozen-lockfile &&
+      pnpm --filter @mem/web build
+    startCommand: pnpm --filter @mem/web start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: /mem-api
+      - key: API_INTERNAL_URL
+        fromService:
+          name: mem-api
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+      - fromGroup: mem-shared
+      - key: NEXT_PUBLIC_DEV_HOSPITAL_SLUG
+        value: asan
