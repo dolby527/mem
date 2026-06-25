@@ -10,7 +10,7 @@
   └─ mem-web.onrender.com (Next.js)
         ├─ /api/seed-image/*     → 시드 이미지 (repo 내 docs/seed)
         └─ /mem-api/*  (proxy)   → mem-api.onrender.com (NestJS)
-              └─ PostgreSQL (Dashboard에서 수동 생성 — Blueprint에 없음)
+              └─ PostgreSQL (`mem-db` — Blueprint 또는 Dashboard)
 ```
 
 - **인증 쿠키**: Web이 `/mem-api`로 API를 프록시해 **같은 도메인**에서 쿠키가 동작합니다.
@@ -18,46 +18,34 @@
 - **시드 이미지**: Web 서비스가 `docs/seed/images`를 서빙 — 로컬과 동일.
 - **앱에서 업로드한 장비 이미지**: Render 디스크는 휘발성·Web/API 분리라 **데모에서는 비권장** (시드 장비 위주로 시연).
 
-## 1. PostgreSQL — `mem-db`가 Blueprint에 없는 이유
+## 1. PostgreSQL (`mem-db`)
 
-**현재 `render.yaml`에는 DB 항목이 없습니다.** Blueprint Sync만으로는 `mem-db`가 생성·표시되지 **않습니다**.
+Blueprint `render.yaml`에 **`mem-db`** 가 포함됩니다. Sync 시 기존 DB와 연결되거나 새로 생성됩니다.
 
-| 시점 | 무슨 일이 있었나 |
-|------|------------------|
-| 첫 Blueprint (`be7cd991`) | `mem-db` 생성 시도 → Free tier **계정당 Postgres 1개** 제한으로 **실패** |
-| 이후 수정 (`598623e3`) | Blueprint에서 DB 생성 제거 → **수동으로 Postgres 1개** 만들고 URL 연결 |
+로그에 아래가 보이면 **mem-api가 DB에 연결되지 않은 것**입니다. 로그인이 되지 않습니다.
 
-그래서 Dashboard에 `mem-db`가 없을 수 있습니다. (실패했거나, 애초에 만들어지지 않음)
+```
+Environment variable not found: DATABASE_URL
+```
 
-### 지금 할 일 — Postgres 직접 생성
+### 즉시 조치 (가장 빠름)
 
-1. Render Dashboard 왼쪽 **PostgreSQL** (또는 **New + → PostgreSQL**)
-2. 설정 예시:
-   - **Name**: `mem-db` (이름은 자유 — Blueprint와 무관)
-   - **Region**: **Singapore** (mem-api / mem-web과 동일)
-   - **Plan**: Free (계정에 Free DB가 **이미 1개**면 새로 못 만듦 → 기존 DB URL 재사용)
-3. 생성 후 DB 페이지 → **Connections** → **Internal Database URL** 복사  
-   (형식: `postgresql://user:pass@dpg-xxxx-a.singapore-postgres.render.com/dbname`)
-4. **mem-api** 서비스 → **Environment** → `DATABASE_URL`에 붙여넣기 → **Save** → **Manual Deploy**
+1. Dashboard → **PostgreSQL** → **`mem-db`** (또는 보유 중인 Postgres)
+2. **Connections** → **Internal Database URL** 복사
+3. **mem-api** → **Environment** → `DATABASE_URL` 붙여넣기 → **Save**
+4. **mem-api** → **Manual Deploy**
 
-> **Internal URL**을 쓰세요. 같은 Render 리전의 mem-api가 DB에 붙습니다.
-
-### Free DB가 이미 1개일 때
-
-Dashboard → **PostgreSQL** 목록을 확인하세요. 다른 프로젝트 DB가 있으면:
-
-- 그 DB의 Internal URL을 MEM `DATABASE_URL`로 쓰거나
-- 안 쓰는 DB를 삭제한 뒤 MEM용 Postgres를 새로 만듭니다.
-
-Blueprint 안에는 `mem-api`, `mem-web` **웹 서비스 2개만** 있습니다.
+| 상황 | 조치 |
+|------|------|
+| `mem-db`가 Dashboard에 있음 | Internal URL을 `DATABASE_URL`에 설정 |
+| `cannot have more than one active free tier database` | 새 DB 생성 불가 — **기존 DB URL** 사용 |
+| Postgres 목록이 비어 있음 | Blueprint **Sync**로 `mem-db` 생성 |
 
 ## 2. Blueprint로 배포
 
-1. [Render](https://render.com) → **New → Blueprint** (또는 기존 Blueprint **Sync**)
-2. 저장소 `dolby527/mem` 선택 → `render.yaml` 적용
-3. **`DATABASE_URL` 입력** — 위 Postgres **Internal Database URL** 붙여넣기  
-   (Blueprint 적용 화면 또는 배포 직후 **mem-api → Environment**)
-4. 배포가 끝나면 **mem-web** URL 확인 (예: `https://mem-web-xxxx.onrender.com`)
+1. [Render](https://render.com) → Blueprint **Sync** (최신 `main`)
+2. `DATABASE_URL`이 자동 연결됐는지 **mem-api → Environment**에서 확인
+3. 배포 후 **mem-web** URL 확인
 
 ### 배포 후 env 수동 설정 (mem-api)
 
@@ -115,6 +103,7 @@ prisma db push && tsx prisma/seed.ts && node dist/main.js
 | **Build failed** (status 1) | `NODE_ENV=production`이면 `pnpm install`이 devDeps 생략 → `render.yaml`은 `--prod=false` + `NODE_ENV`는 start 시에만 설정 |
 | Blueprint DB 생성 실패 | Free Postgres 1개 제한 — 기존 DB URL을 `DATABASE_URL`에 연결 |
 | 로그인 후 바로 로그아웃 | `JWT_SECRET` Web·API 동일한지, `mem-shared` 그룹 연결 여부 |
+| **로그인 중…에서 멈춤** | mem-api 슬립(콜드 스타트 30~60초) · `API_INTERNAL_URL` = `hostport` · mem-api 로그 |
 | API 502 / 타임아웃 | mem-api 로그, DB `DATABASE_URL`, 시작 시 `db push`/seed 성공 여부 |
 | 모니터링 실시간 안 됨 | `/mem-api/monitoring/stream` — mem-api 가동·로그인 세션 |
 | 이미지 안 보임 (시드) | Web 로그, `docs/seed/images` 경로 |

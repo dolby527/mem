@@ -1,6 +1,6 @@
 # MEM demo/staging on Render — https://render.com/docs/blueprint-spec
-# Free tier: Postgres는 계정당 1개 — Blueprint에서 DB를 만들지 않음.
-# 배포 전 Dashboard에서 Postgres 1개 생성 후 DATABASE_URL을 mem-api에 설정.
+# mem-db: Dashboard에 이미 있으면 Blueprint Sync 시 연결됩니다.
+# Free tier DB가 없을 때만 새로 생성 시도합니다.
 # Docs: docs/deploy/RENDER.md
 
 envVarGroups:
@@ -8,6 +8,12 @@ envVarGroups:
     envVars:
       - key: JWT_SECRET
         generateValue: true
+
+databases:
+  - name: mem-db
+    plan: free
+    databaseName: mem
+    user: mem
 
 services:
   - type: web
@@ -24,12 +30,16 @@ services:
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: mem-db
+          property: connectionString
       - fromGroup: mem-shared
       - key: HEALTH_CHECK_SIMULATE
         value: "true"
       - key: COOKIE_DOMAIN
         value: local
+      - key: COOKIE_SAMESITE
+        value: lax
       # After first deploy, set to mem-web URL (Dashboard → mem-api → Environment)
       - key: CORS_ORIGIN
         sync: false
@@ -55,7 +65,7 @@ services:
         fromService:
           name: mem-api
           type: web
-          envVarKey: RENDER_EXTERNAL_URL
+          property: hostport
       - fromGroup: mem-shared
       - key: NEXT_PUBLIC_DEV_HOSPITAL_SLUG
         value: asan

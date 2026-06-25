@@ -11,17 +11,31 @@ async function throwAuthError(response: Response, fallback: string): Promise<nev
 }
 
 export async function loginApi(email: string, password: string): Promise<AuthUser> {
-  const response = await fetch(`${getApiBaseUrl()}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
-  if (!response.ok) {
-    await throwAuthError(response, "로그인에 실패했습니다");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 90_000);
+  try {
+    const response = await fetch(`${getApiBaseUrl()}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+      credentials: "include",
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      await throwAuthError(response, "로그인에 실패했습니다");
+    }
+    const result = (await response.json()) as { user: AuthUser };
+    return result.user;
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new Error(
+        "서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해주세요. (Render 무료 플랜은 깨우는 데 1분 가까이 걸릴 수 있습니다)",
+      );
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
   }
-  const result = (await response.json()) as { user: AuthUser };
-  return result.user;
 }
 
 export async function logoutApi(): Promise<void> {

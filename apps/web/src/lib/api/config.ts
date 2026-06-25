@@ -14,7 +14,12 @@ export function getApiBaseUrl(): string {
     return API_PROXY_PREFIX;
   }
 
-  if (internalUrl) return trimTrailingSlash(internalUrl);
+  if (internalUrl) {
+    if (internalUrl.startsWith("http://") || internalUrl.startsWith("https://")) {
+      return trimTrailingSlash(internalUrl);
+    }
+    return `http://${trimTrailingSlash(internalUrl)}`;
+  }
   if (publicUrl) return trimTrailingSlash(publicUrl);
   return "http://localhost:3001";
 }
