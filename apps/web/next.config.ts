@@ -4,17 +4,6 @@ import type { NextConfig } from "next";
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
-  async rewrites() {
-    const apiInternal = process.env.API_INTERNAL_URL?.trim();
-    if (!apiInternal) return [];
-    const base = apiInternal.replace(/\/$/, "");
-    return [
-      {
-        source: "/mem-api/:path*",
-        destination: `${base}/:path*`,
-      },
-    ];
-  },
   async redirects() {
     return [
       { source: "/equipment", destination: "/monitoring", permanent: false },

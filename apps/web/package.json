@@ -6,7 +6,7 @@
     "tokens": "node scripts/generate-design-tokens.mjs",
     "dev": "pnpm tokens && node --env-file=env/.env.development ./node_modules/next/dist/bin/next dev --port 3000",
     "build": "pnpm tokens && next build",
-    "start": "next start",
+    "start": "next start --hostname 0.0.0.0 --port ${PORT:-3000}",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },

@@ -18,13 +18,11 @@ services:
     buildCommand: >-
       corepack enable &&
       corepack prepare pnpm@9.15.9 --activate &&
-      pnpm install --frozen-lockfile &&
+      pnpm install --frozen-lockfile --prod=false &&
       pnpm --filter @mem/api build
-    startCommand: pnpm --filter @mem/api start:render
+    startCommand: NODE_ENV=production pnpm --filter @mem/api start:render
     healthCheckPath: /health
     envVars:
-      - key: NODE_ENV
-        value: production
       - key: DATABASE_URL
         sync: false
       - fromGroup: mem-shared
@@ -46,12 +44,11 @@ services:
     buildCommand: >-
       corepack enable &&
       corepack prepare pnpm@9.15.9 --activate &&
-      pnpm install --frozen-lockfile &&
+      pnpm install --frozen-lockfile --prod=false &&
       pnpm --filter @mem/web build
-    startCommand: pnpm --filter @mem/web start
+    startCommand: NODE_ENV=production pnpm --filter @mem/web start
+    healthCheckPath: /login
     envVars:
-      - key: NODE_ENV
-        value: production
       - key: NEXT_PUBLIC_API_URL
         value: /mem-api
       - key: API_INTERNAL_URL
