@@ -1,0 +1,14 @@
+---
+description: NestJS API 및 Prisma 규칙 (apps/api)
+globs: apps/api/**/*
+alwaysApply: false
+---
+
+# API (@mem/api)
+
+- NestJS 모듈: `src/<feature>/` (equipment, hospitals, monitoring 등)
+- DTO: `class-validator`, `whitelist`
+- 보호 라우트: JWT guard; `hospitalId` 스코프 검증
+- Prisma: `prisma/schema.prisma`
+- env: `env/.env.development` / `env/.env.production` — 시크릿 커밋 금지
+- **수정 후:** `pnpm --filter @mem/api run typecheck && pnpm --filter @mem/api run lint`

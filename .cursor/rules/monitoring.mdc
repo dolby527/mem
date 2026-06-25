@@ -1,0 +1,15 @@
+---
+description: 장비 점검·실시간 모니터링 (apps/api monitoring, Web 대시보드)
+globs: apps/api/src/monitoring/**,apps/api/src/equipment/**,apps/web/src/**/monitoring/**,apps/web/src/**/equipment/**
+alwaysApply: false
+---
+
+# Monitoring (MEM core)
+
+- 주기 점검: `docs/MONITORING.md` — scheduler, health-check service, HealthCheckLog
+- 상태 enum: `RUNNING`, `IDLE`, `FAULT`, `OFFLINE`
+- 소스 타입: `PING`, `MEDICAL_PROTOCOL`, `IOT_SENSOR`, `AGENT` — `statusSourceType`별 probe 분기
+- 실시간: **SSE** (`sse.controller`, `statusUpdate` 이벤트). WebSocket·폴링 사용 안 함
+- 타이밍: `monitoring.constants.ts` + env (`HEALTH_CHECK_INTERVAL_MS`, `PING_FAILURE_THRESHOLD`, `AGENT_HEARTBEAT_STALE_MS` 등). 매직 넘버 금지
+- 점검 실패: batch·timeout·연속 실패 임계치 — `docs/MONITORING.md` 재시도 정책
+- SSE·stream API도 `hospitalId` 스코프 필수

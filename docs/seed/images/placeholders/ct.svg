@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="CT">
+  <rect width="400" height="300" fill="#f1f5f9"/>
+  <rect x="32" y="48" width="336" height="204" rx="16" fill="#475569"/>
+  <rect x="120" y="115" width="160" height="100" rx="10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="3"/><circle cx="200" cy="165" r="35" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+  <text x="200" y="100" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="13" font-weight="600">CT</text>
+  <text x="200" y="248" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">MEM category placeholder</text>
+</svg>

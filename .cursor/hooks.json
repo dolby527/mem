@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": ".cursor/hooks/session-context.sh"
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/allow-quality-checks.sh"
+      },
+      {
+        "command": ".cursor/hooks/guard-secrets.sh"
+      }
+    ]
+  }
+}

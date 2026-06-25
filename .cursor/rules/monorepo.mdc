@@ -1,0 +1,13 @@
+---
+description: MEM 모노레포 공통 규칙
+alwaysApply: true
+---
+
+# MEM monorepo
+
+- Node 24.14.0, pnpm 9.x — 한 앱만 다룰 때가 아니면 레포 루트에서 명령 실행
+- diff 범위 최소화; 수정한 앱의 기존 패턴 따르기
+- 시크릿 커밋 금지 (`apps/*/env/.env.production`, 실제 키가 들어간 `.env`)
+- **병원 스코프:** Equipment·상태·모니터링 API는 `hospitalId` 격리 필수
+- 도메인·모니터링: `docs/PROJECT.md`, `docs/MONITORING.md`
+- **코드 변경 마무리(필수·자동):** 사용자에게 **물어보지 않고** 레포 루트에서 `pnpm typecheck` → `pnpm lint` 실행. "실행할까요?" 질문 금지. 실패 시 수정 후 재실행. 상세: `docs/CODE-QUALITY.md`, `.cursor/rules/code-quality-auto.mdc`

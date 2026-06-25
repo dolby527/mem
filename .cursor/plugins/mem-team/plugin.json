@@ -1,0 +1,15 @@
+{
+  "name": "mem-team",
+  "version": "1.0.0",
+  "description": "MEM monorepo — project skills, agents, and hooks (see docs/CURSOR-SETUP.md)",
+  "repository": "mem",
+  "skills": [".cursor/skills/mem", ".cursor/skills/mem-seed", ".cursor/skills/mem-deploy"],
+  "agents": [
+    ".cursor/agents/mem-explore.md",
+    ".cursor/agents/mem-api.md",
+    ".cursor/agents/mem-web.md",
+    ".cursor/agents/mem-monitoring.md",
+    ".cursor/agents/mem-seed.md"
+  ],
+  "docs": ["AGENTS.md", "CLAUDE.md", "docs/PROJECT.md", "docs/MONITORING.md", "docs/SEED-DATA.md", "docs/CURSOR-SETUP.md"]
+}

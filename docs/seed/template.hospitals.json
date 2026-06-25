@@ -1,0 +1,12 @@
+{
+  "hospitals": [
+    {
+      "slug": "example-hospital",
+      "name": "예시병원",
+      "nameEn": "Example Hospital",
+      "region": "서울",
+      "website": "https://example.org",
+      "notes": "Agent 리서치 시작 URL"
+    }
+  ]
+}

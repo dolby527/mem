@@ -1,0 +1,14 @@
+---
+description: Next.js 웹 앱 규칙 (apps/web)
+globs: apps/web/**/*
+alwaysApply: false
+---
+
+# Web (@mem/web)
+
+- App Router; 반응형 UI (데스크탑 / 태블릿 / 모바일)
+- **스타일:** Vanilla Extract (`*.css.ts`). Tailwind 사용 안 함.
+- **디자인 토큰:** `docs/DESIGN.md` → `pnpm --filter @mem/web tokens` → `src/styles/generated/tokens.ts`
+- API: `getApiBaseUrl()` + `cookieFetch` (`apps/web/src/lib/api/`)
+- 새 엔드포인트: `src/lib/api/<name>.api.ts`
+- 모니터링 UI: 실시간 구독 패턴은 `docs/MONITORING.md` 준수

@@ -1,0 +1,36 @@
+{
+  "equipment": [
+    {
+      "hospitalSlug": "example-hospital",
+      "equipmentSlug": "example-hospital-siemens-somatom-force-ct",
+      "name": "Siemens SOMATOM Force CT",
+      "category": "CT",
+      "location": "영상의학과",
+      "manufacturer": "Siemens Healthineers",
+      "model": "SOMATOM Force",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 네트워크 연결 여부만 확인.",
+      "currentStatus": "IDLE",
+      "evidence": [
+        {
+          "url": "https://example.org/hospital/radiology-equipment",
+          "title": "병원 공식 장비 안내 (모델명 명시)",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ],
+      "confidence": "medium",
+      "devProbeHost": null,
+      "notes": null,
+      "image": {
+        "alt": "Siemens SOMATOM Force CT",
+        "localPath": "docs/seed/images/equipment/example-hospital-siemens-somatom-force-ct.jpg",
+        "remoteUrl": "https://marketing.webassets.siemens-healthineers.com/.../product.jpg",
+        "kind": "manufacturer_product",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://www.siemens-healthineers.com/computed-tomography",
+        "licenseNote": "Manufacturer marketing asset — dev seed only."
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common";
+import { UserRole } from "@prisma/client";
+import type { Request } from "express";
+
+/** 장비 등록·수정·삭제 — 병원 관리자 또는 플랫폼 운영자 */
+@Injectable()
+export class EquipmentManageGuard implements CanActivate {
+  canActivate(context: ExecutionContext): boolean {
+    const req = context.switchToHttp().getRequest<Request>();
+    const role = req.user?.role;
+    if (
+      role !== UserRole.HOSPITAL_ADMIN &&
+      role !== UserRole.PLATFORM_ADMIN
+    ) {
+      throw new ForbiddenException(
+        "장비 관리는 병원 관리자만 할 수 있습니다.",
+      );
+    }
+    return true;
+  }
+}

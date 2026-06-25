@@ -1,0 +1,833 @@
+{
+  "equipment": [
+    {
+      "hospitalSlug": "asan",
+      "name": "Siemens Biograph Vision 600 PET/CT",
+      "category": "OTHER",
+      "location": "핵의학과 PET 검사실",
+      "manufacturer": "Siemens Healthineers",
+      "model": "Biograph Vision 600",
+      "manufacturedAt": "2022-03-15",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 네트워크 연결 여부만 확인. DICOM 연동은 2단계.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "디지털 PET/CT 2대 중 1대 표기. 대수·시리얼 미기재.",
+      "equipmentSlug": "asan-siemens-biograph-vision-600-pet-ct",
+      "image": {
+        "alt": "Siemens Biograph Vision 600 PET/CT",
+        "localPath": "docs/seed/images/equipment/asan-siemens-biograph-vision-600-pet-ct.png",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20220317?fileName=02.png",
+        "kind": "hospital_page",
+        "mimeType": "image/png",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 시설·장비 페이지 — Biograph Vision PET/CT. Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://eng.amc.seoul.kr/gb/lang/specialities/departments.do?hpCd=D042",
+          "title": "Asan Medical Center — Nuclear Medicine (PET/CT Scanners)",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=891",
+          "title": "서울아산병원 핵의학과 연혁 — Biograph Vision 600 입고",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "GE Discovery 690 / 710 PET/CT",
+      "category": "OTHER",
+      "location": "핵의학과 PET 검사실",
+      "manufacturer": "GE HealthCare",
+      "model": "Discovery 690 / 710",
+      "manufacturedAt": "2018-11-20",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 네트워크 연결 여부만 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "아날로그 PET/CT 2대 묶음 표기. 690·710 개별 대수 미확인.",
+      "equipmentSlug": "asan-ge-discovery-690-710-pet-ct",
+      "image": {
+        "alt": "GE Discovery 690 / 710 PET/CT",
+        "localPath": "docs/seed/images/equipment/asan-ge-discovery-690-710-pet-ct.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140620?fileName=D042_img96.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 공개 사진 — Discovery 690 PET/CT (690·710 묶음 항목). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://eng.amc.seoul.kr/gb/lang/specialities/departments.do?hpCd=D042",
+          "title": "Asan Medical Center — 2 analog PET/CT (Discovery 690/710)",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "GE PETtrace Cyclotron",
+      "category": "OTHER",
+      "location": "핵의학과 cyclotron실 (신관)",
+      "manufacturer": "GE HealthCare",
+      "model": "PETtrace",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 제조·분배 시설 네트워크 연결 여부 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "2008년 12월 설치(공식 페이지). 동관 IBA 사이클로트론은 별도 항목.",
+      "equipmentSlug": "asan-ge-pettrace-cyclotron",
+      "image": {
+        "alt": "GE PETtrace Cyclotron",
+        "localPath": "docs/seed/images/equipment/asan-ge-pettrace-cyclotron.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140620?fileName=D042_img106.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://www.amc.seoul.kr/asan/depts/nm/K/bbsDetail.do?contentId=270981&menuId=5070",
+        "licenseNote": "서울아산병원 핵의학과 — 신관 GE PETtrace Cyclotron. Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://www.amc.seoul.kr/asan/depts/nm/K/bbsDetail.do?contentId=270981&menuId=5070",
+          "title": "PET 검사용 방사성 의약품 제조 — GE PETtrace",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+          "title": "핵의학과 시설 및 장비 — Cyclotron",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "IBA Cyclone 18/9 Cyclotron",
+      "category": "OTHER",
+      "location": "핵의학과 cyclotron실 (동관)",
+      "manufacturer": "IBA",
+      "model": "Cyclone 18/9",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 시설 장비 네트워크 연결 여부 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": null,
+      "equipmentSlug": "asan-iba-cyclone-18-9-cyclotron",
+      "image": {
+        "alt": "IBA Cyclone 18/9 Cyclotron",
+        "localPath": "docs/seed/images/equipment/asan-iba-cyclone-18-9-cyclotron.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140620?fileName=D042_img105.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 — 동관 IBA Cyclone 18/9 Cyclotron. Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+          "title": "핵의학과 시설 및 장비 — IBA 18/9 Cyclotron",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "GE Discovery NM 530c (Digital Cardiac Camera)",
+      "category": "OTHER",
+      "location": "핵의학과",
+      "manufacturer": "GE HealthCare",
+      "model": "Discovery NM 530c",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 네트워크 연결 여부만 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "감마카메라 13대 중 디지털 심장 전용 1대로 명시.",
+      "equipmentSlug": "asan-ge-discovery-nm-530c-digital-cardiac-camera",
+      "image": {
+        "alt": "GE Discovery NM 530c (Digital Cardiac Camera)",
+        "localPath": "docs/seed/images/equipment/asan-ge-discovery-nm-530c-digital-cardiac-camera.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20190925?fileName=530.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 — Discovery NM 530c. Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://eng.amc.seoul.kr/gb/lang/specialities/departments.do?hpCd=D042",
+          "title": "Asan Medical Center — digital cardiac camera GE Discovery NM 530c",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Siemens MAGNETOM Avanto 1.5T MRI",
+      "category": "MRI",
+      "location": "영상의학과",
+      "manufacturer": "Siemens Healthineers",
+      "model": "MAGNETOM Avanto",
+      "manufacturedAt": "2016-04-12",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 영상의학 장비 네트워크 연결 확인. DICOM은 2단계.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": null,
+      "notes": "기관 내 1.5T·3T 다기종 운용 중 일부. 전체 대수·설치 위치 미확인.",
+      "equipmentSlug": "asan-siemens-magnetom-avanto-1-5t-mri",
+      "image": {
+        "alt": "Siemens MAGNETOM Avanto 1.5T MRI",
+        "localPath": "docs/seed/images/equipment/asan-siemens-magnetom-avanto-1-5t-mri.png",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20220317?fileName=02.png",
+        "kind": "hospital_page",
+        "mimeType": "image/png",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 — Biograph Vision(1.5T MRI·Avanto 대표 미공개, 동 병원 영상 장비실). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://www.kjronline.org/DOIx.php?id=10.3348%2Fkjr.2020.1403",
+          "title": "Korean Journal of Radiology — AMC rectal MRI (Magnetom Avanto and Skyra)",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Siemens MAGNETOM Skyra 3T MRI",
+      "category": "MRI",
+      "location": "영상의학과",
+      "manufacturer": "Siemens Healthineers",
+      "model": "MAGNETOM Skyra",
+      "manufacturedAt": "2019-06-01",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 영상의학 장비 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": null,
+      "notes": null,
+      "equipmentSlug": "asan-siemens-magnetom-skyra-3t-mri",
+      "image": {
+        "alt": "Siemens MAGNETOM Skyra 3T MRI",
+        "localPath": "docs/seed/images/equipment/asan-siemens-magnetom-skyra-3t-mri.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140620?fileName=D042_img97.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 공개 사진 — Discovery 710 PET/CT (영상의학 MRI 대표 미공개, 동일 병원 영상 장비실). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://www.kjronline.org/DOIx.php?id=10.3348%2Fkjr.2020.1403",
+          "title": "Korean Journal of Radiology — AMC Magnetom Skyra",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        },
+        {
+          "url": "https://www.cell.com/cell-reports-medicine/fulltext/S2666-3791(25)00280-0",
+          "title": "Cell Reports Medicine — AMC multi-vendor MRI including Skyra, Vida",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Philips Ingenia MRI",
+      "category": "MRI",
+      "location": "영상의학과",
+      "manufacturer": "Philips",
+      "model": "Ingenia",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 다제조사 MRI 중 Philips 계열 ping.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": null,
+      "notes": "정확한 Ingenia 하위 모델·대수 미확인.",
+      "equipmentSlug": "asan-philips-ingenia-mri",
+      "image": {
+        "alt": "Philips Ingenia MRI",
+        "localPath": "docs/seed/images/equipment/asan-philips-ingenia-mri.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20200609?fileName=%EB%8F%993%EB%B2%88_NM830_1.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://nm.amc.seoul.kr/asan/depts/nm/K/content.do?menuId=908",
+        "licenseNote": "서울아산병원 핵의학과 공개 사진 — 감마카메라(NM830). Philips MRI 전용 실사 미공개. Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://www.kjronline.org/DOIx.php?id=10.3348%2Fkjr.2020.1403",
+          "title": "KJR — AMC Ingenia (Philips) alongside Siemens scanners",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Medtronic Puritan Bennett 840 Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실",
+      "manufacturer": "Medtronic",
+      "model": "Puritan Bennett 840",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 네트워크 연결 여부(연결 시).",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "공식 페이지는 PB840 명칭. 제조사는 페이지에 미명시(Medtronic PB840 계열).",
+      "equipmentSlug": "asan-medtronic-puritan-bennett-840-ventilator",
+      "image": {
+        "alt": "Medtronic Puritan Bennett 840 Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-medtronic-puritan-bennett-840-ventilator.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140611?fileName=D049_img41.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+        "licenseNote": "서울아산병원 중환자실 — 이동성 인공호흡기(PB840 계열). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+          "title": "서울아산병원 중환자실 — PB840 인공호흡기",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Getinge Servo-i Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실",
+      "manufacturer": "Getinge",
+      "model": "Servo-i",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "페이지 표기 Servo-I.",
+      "equipmentSlug": "asan-getinge-servo-i-ventilator",
+      "image": {
+        "alt": "Getinge Servo-i Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-getinge-servo-i-ventilator.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140611?fileName=D049_img42.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+        "licenseNote": "서울아산병원 중환자실 — 이동성 인공호흡기2(Servo-I 등 ICU 호흡기). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+          "title": "서울아산병원 중환자실 — Servo-I 인공호흡기",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-A 1번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2020-08-03",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "RUNNING",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.101",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-01",
+      "notes": "Evita 세부 모델(V500 등) 미확인. 시드 10대 중 1/10.",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140611?fileName=D049_img41.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+        "licenseNote": "서울아산병원 중환자실 — ICU 호흡기(Evita 세부 모델 미구분, 동 페이지 대표 사진). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+          "title": "서울아산병원 중환자실 — Evita 인공호흡기",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-A 2번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2019-02-14",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "RUNNING",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.102",
+      "notes": "시드 10대 중 2/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-02",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg",
+        "remoteUrl": "https://www.amc.seoul.kr/asan/imageDown/homebuilder/20140611?fileName=D049_img41.jpg",
+        "kind": "hospital_page",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://icu.amc.seoul.kr/asan/depts/icu/K/content.do?menuId=1100",
+        "licenseNote": "서울아산병원 중환자실 — ICU 호흡기. Dev seed only."
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-A 3번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2021-05-22",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.103",
+      "notes": "시드 10대 중 3/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-03",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-A 4번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2017-10-09",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "RUNNING",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.104",
+      "notes": "시드 10대 중 4/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-04",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-B 1번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2022-01-30",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.105",
+      "notes": "시드 10대 중 5/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-05",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-B 2번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2018-07-18",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "FAULT",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.106",
+      "notes": "시드 10대 중 6/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-06",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-B 3번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2020-11-05",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "RUNNING",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.107",
+      "notes": "시드 10대 중 7/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-07",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-B 4번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2019-09-12",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.108",
+      "notes": "시드 10대 중 8/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-08",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-C 1번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2016-03-25",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "OFFLINE",
+      "confidence": "medium",
+      "devProbeHost": null,
+      "notes": "시드 10대 중 9/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-09",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "asan",
+      "name": "Dräger Evita Ventilator",
+      "category": "VENTILATOR",
+      "location": "중환자실 ICU-C 2번 베드",
+      "manufacturer": "Dräger",
+      "model": "Evita (series)",
+      "manufacturedAt": "2021-08-30",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: ICU 호흡기 연결 여부.",
+      "currentStatus": "IDLE",
+      "confidence": "medium",
+      "devProbeHost": "192.168.50.110",
+      "notes": "시드 10대 중 10/10.",
+      "equipmentSlug": "asan-dr-ger-evita-ventilator-10",
+      "image": {
+        "alt": "Dräger Evita Ventilator",
+        "localPath": "docs/seed/images/equipment/asan-dr-ger-evita-ventilator.jpg"
+      }
+    },
+    {
+      "hospitalSlug": "yonsei-severance",
+      "name": "Siemens Biograph TruePoint PET/CT 40",
+      "category": "OTHER",
+      "location": "핵의학과 PET-CT",
+      "manufacturer": "Siemens Healthineers",
+      "model": "Biograph TruePoint PET/CT 40",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: PET/CT 장비 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "논문 코호트 n=140. 동일 모델 다대 가능.",
+      "equipmentSlug": "yonsei-severance-siemens-biograph-truepoint-pet-ct-40",
+      "evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41598-025-23649-w",
+          "title": "Scientific Reports — Shinchon Severance PET/CT scanners",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "yonsei-severance",
+      "name": "GE Discovery 710 PET/CT",
+      "category": "OTHER",
+      "location": "핵의학과 PET-CT",
+      "manufacturer": "GE HealthCare",
+      "model": "Discovery 710",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: PET/CT 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "논문 코호트 n=93.",
+      "equipmentSlug": "yonsei-severance-ge-discovery-710-pet-ct",
+      "evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41598-025-23649-w",
+          "title": "Scientific Reports — Shinchon Severance GE Discovery 710 PET/CT",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "yonsei-severance",
+      "name": "GE Discovery 600e PET/CT",
+      "category": "OTHER",
+      "location": "핵의학과 PET-CT",
+      "manufacturer": "GE HealthCare",
+      "model": "Discovery 600e",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: PET/CT 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "논문 코호트 n=131.",
+      "equipmentSlug": "yonsei-severance-ge-discovery-600e-pet-ct",
+      "evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41598-025-23649-w",
+          "title": "Scientific Reports — Shinchon Severance GE Discovery 600e PET/CT",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "yonsei-severance",
+      "name": "Siemens MRI (영상의학과 다기종)",
+      "category": "MRI",
+      "location": "영상의학과",
+      "manufacturer": "Siemens Healthineers",
+      "model": "다기종 (HASTE, True FISP 등 시퀀스 사용)",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: MRI 장비군 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "low",
+      "devProbeHost": null,
+      "notes": "구체 모델명·대수 미확인. 심장 MRI 프로토콜 논문에서 Siemens 시퀀스 사용 확인.",
+      "equipmentSlug": "yonsei-severance-siemens-mri",
+      "image": {
+        "alt": "Siemens MRI (영상의학과 다기종)",
+        "localPath": "docs/seed/images/equipment/yonsei-severance-siemens-mri.jpg",
+        "remoteUrl": "https://sev.severance.healthcare/_attach/yuhs/editor-image/2024/07/WHPjHPJEHkRLmnmHOjDMExIqMD.jpg",
+        "kind": "hospital_press",
+        "mimeType": "image/jpeg",
+        "sourcePageUrl": "https://sev.severance.healthcare/sev/news/press/report.do?articleNo=123379&mode=view",
+        "licenseNote": "세브란스병원 보도자료 — 3.0T MRI 추가 도입. 병원 촬영·홍보용 장비 사진(모델·제조사 표기). Dev seed only."
+      },
+      "evidence": [
+        {
+          "url": "https://synapse.koreamed.org/articles/1130846",
+          "title": "KoreaMed — Severance cardiac MRI Siemens sequences",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        },
+        {
+          "url": "https://sev.severance.healthcare/sev-en/about/floor.do",
+          "title": "Severance Hospital — Diagnostic Radiology CT, MRI",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "yonsei-severance",
+      "name": "초음파 검사 장비 (영상의학과)",
+      "category": "ULTRASOUND",
+      "location": "영상의학과",
+      "manufacturer": null,
+      "model": null,
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 초음파 장비 네트워크 연결 여부(연결형인 경우).",
+      "currentStatus": "IDLE",
+      "confidence": "low",
+      "devProbeHost": null,
+      "notes": "제조사·모델 공개 자료 없음. 카테고리 보유만 확인.",
+      "equipmentSlug": "yonsei-severance-ultrasound",
+      "evidence": [
+        {
+          "url": "https://sev.severance.healthcare/sev-en/about/floor.do",
+          "title": "Severance — Diagnostic Radiology includes Ultrasound",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://sev.severance.healthcare/sev/news/press/report.do?articleNo=125309&mode=view",
+          "title": "세브란스병원 — 초음파 vs 비조영 MRI 간암 감시 연구",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "gangnam-severance",
+      "name": "Elekta Unity MR-LINAC",
+      "category": "OTHER",
+      "location": "방사선종양학과",
+      "manufacturer": "Elekta",
+      "model": "Unity",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 치료 장비 네트워크 연결 확인. 실시간 영상은 2단계 MEDICAL_PROTOCOL 검토.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": "1.5T MRI + 7MV LINAC 통합. 2021-08-23 첫 환자 치료.",
+      "equipmentSlug": "gangnam-severance-elekta-unity-mr-linac",
+      "evidence": [
+        {
+          "url": "https://www.elekta.com/focus/korean-medical-center-marks-one-year-anniversary-with-countrys-first-elekta-unity-mr-linac/",
+          "title": "Elekta — Gangnam Severance first Unity in Korea",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://medifonews.com/news/article.html?no=163124",
+          "title": "강남세브란스병원 유니티 본격 가동",
+          "accessedAt": "2026-06-12",
+          "purpose": "other_public"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "gangnam-severance",
+      "name": "Elekta Versa HD Linear Accelerator",
+      "category": "OTHER",
+      "location": "방사선종양학과",
+      "manufacturer": "Elekta",
+      "model": "Versa HD",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 방사선 치료 장비 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": null,
+      "equipmentSlug": "gangnam-severance-elekta-versa-hd-linear-accelerator",
+      "evidence": [
+        {
+          "url": "https://www.elekta.com/focus/korean-medical-center-marks-one-year-anniversary-with-countrys-first-elekta-unity-mr-linac/",
+          "title": "Elekta — Gangnam Severance equipment includes Versa HD",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://medifonews.com/news/article.html?no=163124",
+          "title": "강남세브란스 — 2014 VERSA 도입 언급",
+          "accessedAt": "2026-06-12",
+          "purpose": "other_public"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "gangnam-severance",
+      "name": "Siemens Biograph TruePoint PET/CT 40",
+      "category": "OTHER",
+      "location": "핵의학과 PET-CT",
+      "manufacturer": "Siemens Healthineers",
+      "model": "Biograph TruePoint PET/CT 40",
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: PET/CT 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "high",
+      "devProbeHost": null,
+      "notes": null,
+      "equipmentSlug": "gangnam-severance-siemens-biograph-truepoint-pet-ct-40",
+      "evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41598-025-23649-w",
+          "title": "Scientific Reports — Gangnam Severance PET/CT (n=156)",
+          "accessedAt": "2026-06-12",
+          "purpose": "research_paper"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "gangnam-severance",
+      "name": "MRI 검사실 (진단용)",
+      "category": "MRI",
+      "location": "B1 MRI검사실 등",
+      "manufacturer": null,
+      "model": null,
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: MRI 장비 네트워크 연결 확인.",
+      "currentStatus": "IDLE",
+      "confidence": "low",
+      "devProbeHost": null,
+      "notes": "진단용 MRI 다대 운영 추정이나 제조사·모델 공개 자료 부족. Unity 내장 1.5T MRI는 치료용 별도 항목.",
+      "equipmentSlug": "gangnam-severance-mri",
+      "evidence": [
+        {
+          "url": "https://gs.severance.healthcare/gs/patient-carer/guide/facility/floormap.do",
+          "title": "강남세브란스병원 층별 시설 — B1 MRI검사실",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        },
+        {
+          "url": "https://gs.severance.healthcare/gs/department/department/radiology.do",
+          "title": "강남세브란스 영상의학과 — CT·MRI 검사",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    },
+    {
+      "hospitalSlug": "gangnam-severance",
+      "name": "초음파 검사 장비 (영상의학과)",
+      "category": "ULTRASOUND",
+      "location": "1층 초음파실",
+      "manufacturer": null,
+      "model": null,
+      "statusSourceType": "PING",
+      "statusSourceTypeReason": "MVP: 초음파 장비 연결 여부(연결형인 경우).",
+      "currentStatus": "IDLE",
+      "confidence": "low",
+      "devProbeHost": null,
+      "notes": "제조사·모델 미확인.",
+      "equipmentSlug": "gangnam-severance-ultrasound",
+      "evidence": [
+        {
+          "url": "https://gs.severance.healthcare/gs/patient-carer/guide/facility/floormap.do",
+          "title": "강남세브란스 층별 시설 — 1층 초음파실",
+          "accessedAt": "2026-06-12",
+          "purpose": "hospital_or_vendor_page"
+        }
+      ]
+    }
+  ]
+}

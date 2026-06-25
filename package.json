@@ -1,0 +1,27 @@
+{
+  "name": "mem",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": "24.14.0",
+    "pnpm": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @mem/web --filter @mem/api dev",
+    "dev:web": "pnpm --filter @mem/web dev",
+    "dev:api": "pnpm --filter @mem/api dev",
+    "build": "pnpm --filter @mem/api build && pnpm --filter @mem/web build",
+    "lint": "pnpm --filter @mem/api lint && pnpm --filter @mem/web lint",
+    "typecheck": "pnpm --filter @mem/api typecheck && pnpm --filter @mem/web typecheck",
+    "db:up": "docker compose up -d db",
+    "db:migrate": "pnpm --filter @mem/api db:push",
+    "db:seed": "pnpm --filter @mem/api db:seed",
+    "prisma:studio": "pnpm --filter @mem/api db:studio",
+    "sim:protocol": "pnpm --filter @mem/api sim:protocol"
+  },
+  "devDependencies": {
+    "prettier": "3.7.4",
+    "turbo": "2.9.12",
+    "typescript": "5.9.3"
+  }
+}

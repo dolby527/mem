@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  HOSPITAL_USER
+  HOSPITAL_ADMIN
+  PLATFORM_ADMIN
+}
+
+enum EquipmentCategory {
+  MRI
+  CT
+  ULTRASOUND
+  VENTILATOR
+  MAMMOGRAPHY
+  MONITOR
+  OTHER
+}
+
+enum EquipmentStatus {
+  RUNNING
+  IDLE
+  FAULT
+  OFFLINE
+}
+
+enum MaintenanceStatus {
+  NONE
+  PM_SCHEDULED
+}
+
+enum MaintenanceScheduleType {
+  PM
+  CONSUMABLE
+  CALIBRATION
+  PERFORMANCE
+  REPAIR
+}
+
+enum MaintenanceScheduleStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  OVERDUE
+}
+
+enum RecurrenceInterval {
+  NONE
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum StatusSourceType {
+  PING
+  MEDICAL_PROTOCOL
+  IOT_SENSOR
+  AGENT
+  INTERFACE_VENDOR
+}
+
+enum VendorInterfaceType {
+  PATIENT_MONITOR
+  EKG
+  OUTPATIENT
+  LIS
+  OTHER
+}
+
+model Hospital {
+  id                     String   @id @default(cuid())
+  slug                   String   @unique
+  name                   String
+  nameEn                 String?
+  region                 String?
+  website                String?
+  notes                  String?
+  interfaceIngestTokenHash String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  users     User[]
+  equipment Equipment[]
+  invites   Invite[]
+  maintenanceChecklistTemplates MaintenanceChecklistTemplate[]
+  maintenanceSchedules          MaintenanceSchedule[]
+  faqItems                      FaqItem[]
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  email              String    @unique
+  name               String
+  password           String
+  avatarUrl          String?
+  role               UserRole  @default(HOSPITAL_USER)
+  hospitalId         String
+  hospital           Hospital  @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  hashedRefreshToken String?
+  deletedAt          DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  invitesSent        Invite[]  @relation("InvitedBy")
+  maintenanceSchedulesAssigned MaintenanceSchedule[] @relation("MaintenanceAssignee")
+  maintenanceSchedulesCreated  MaintenanceSchedule[] @relation("MaintenanceCreator")
+
+  @@index([hospitalId])
+}
+
+model Invite {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  hospitalId  String
+  hospital    Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  invitedById String
+  invitedBy   User     @relation("InvitedBy", fields: [invitedById], references: [id], onDelete: Cascade)
+  expiresAt   DateTime
+  isUsed      Boolean  @default(false)
+  role        UserRole
+  createdAt   DateTime @default(now())
+
+  @@index([hospitalId])
+}
+
+model Equipment {
+  id                     String               @id @default(cuid())
+  hospitalId             String
+  hospital               Hospital             @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  equipmentSlug          String               @unique
+  name                   String
+  category               EquipmentCategory    @default(OTHER)
+  location               String?
+  spatialBuilding        String?
+  spatialFloor           String?
+  spatialRoom            String?
+  manufacturer           String?
+  model                  String?
+  manufacturedAt         DateTime?
+  statusSourceType       StatusSourceType     @default(PING)
+  statusSourceTypeReason String?
+  fallbackSourceType     StatusSourceType?
+  vendorDeviceId         String?
+  vendorInterfaceType    VendorInterfaceType?
+  vendorLastEventAt      DateTime?
+  agentLastSeenAt        DateTime?
+  agentTokenHash         String?
+  iotIdleThresholdW      Float?
+  iotRunningThresholdW   Float?
+  iotLastReadingW        Float?
+  iotLastReadingAt       DateTime?
+  statusResolvedFrom     StatusSourceType?
+  currentStatus          EquipmentStatus      @default(IDLE)
+  currentStatusSinceAt   DateTime             @default(now())
+  lastCheckedAt          DateTime?
+  maintenanceStatus      MaintenanceStatus    @default(NONE)
+  pmScheduledAt          DateTime?
+  devProbeHost           String?
+  imageUrl               String?
+  imageAlt               String?
+  notes                  String?
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+
+  healthCheckLogs HealthCheckLog[]
+  maintenanceSchedules MaintenanceSchedule[]
+
+  @@unique([hospitalId, vendorDeviceId])
+  @@index([hospitalId])
+  @@index([hospitalId, currentStatus])
+  @@index([hospitalId, maintenanceStatus])
+}
+
+model HealthCheckLog {
+  id           String          @id @default(cuid())
+  equipmentId  String
+  equipment    Equipment       @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  checkedAt    DateTime        @default(now())
+  status       EquipmentStatus
+  latencyMs    Int?
+  errorMessage String?
+  sourceType   StatusSourceType
+
+  @@index([equipmentId, checkedAt(sort: Desc)])
+}
+
+model MaintenanceChecklistTemplate {
+  id              String                  @id @default(cuid())
+  hospitalId      String
+  hospital        Hospital                @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  name            String
+  manufacturer    String?
+  model           String?
+  category        EquipmentCategory?
+  maintenanceType MaintenanceScheduleType
+  items           Json
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+
+  @@index([hospitalId])
+  @@index([hospitalId, maintenanceType])
+}
+
+model MaintenanceSchedule {
+  id                  String                    @id @default(cuid())
+  hospitalId          String
+  hospital            Hospital                  @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  equipmentId         String
+  equipment           Equipment                 @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  maintenanceType     MaintenanceScheduleType
+  status              MaintenanceScheduleStatus @default(SCHEDULED)
+  scheduledDate       DateTime                  @db.Date
+  startedAt           DateTime?
+  completedAt         DateTime?
+  assignedToUserId    String?
+  assignedTo          User?                     @relation("MaintenanceAssignee", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+  vendorEngineer      String?
+  estimatedHours      Float?
+  estimatedCost       Float?
+  checklistSnapshot   Json?
+  recurrenceGroupId   String?
+  recurrenceInterval  RecurrenceInterval        @default(NONE)
+  createdByUserId     String?
+  createdBy           User?                     @relation("MaintenanceCreator", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  notes               String?
+  createdAt           DateTime                  @default(now())
+  updatedAt           DateTime                  @updatedAt
+
+  @@index([hospitalId, scheduledDate])
+  @@index([hospitalId, status])
+  @@index([equipmentId, scheduledDate])
+  @@index([recurrenceGroupId])
+}
+
+model FaqItem {
+  id          String   @id @default(cuid())
+  hospitalId  String
+  hospital    Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  sortOrder   Int      @default(0)
+  question    String
+  answer      String
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([hospitalId, sortOrder])
+}

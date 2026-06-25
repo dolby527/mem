@@ -1,0 +1,28 @@
+{
+  "hospitals": [
+    {
+      "slug": "asan",
+      "name": "서울아산병원",
+      "nameEn": "Asan Medical Center",
+      "region": "서울",
+      "website": "https://www.amc.seoul.kr",
+      "notes": "서울 송파구 올림픽로43길 88"
+    },
+    {
+      "slug": "yonsei-severance",
+      "name": "세브란스병원",
+      "nameEn": "Severance Hospital",
+      "region": "서울",
+      "website": "https://www.severance.healthcare",
+      "notes": "연세대학교 세브란스병원(신촌)"
+    },
+    {
+      "slug": "gangnam-severance",
+      "name": "강남세브란스병원",
+      "nameEn": "Gangnam Severance Hospital",
+      "region": "서울",
+      "website": "https://gs.severance.healthcare",
+      "notes": "서울 강남구 언주로 211"
+    }
+  ]
+}
