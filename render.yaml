@@ -65,7 +65,7 @@ services:
         fromService:
           name: mem-api
           type: web
-          property: hostport
+          envVarKey: RENDER_EXTERNAL_URL
       - fromGroup: mem-shared
       - key: NEXT_PUBLIC_DEV_HOSPITAL_SLUG
         value: asan

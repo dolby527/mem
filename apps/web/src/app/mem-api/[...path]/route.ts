@@ -6,6 +6,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const PROXY_TIMEOUT_MS = 120_000;
+const PROXY_RETRY_MS = 4_000;
+const PROXY_MAX_ATTEMPTS = 4;
 
 function buildTargetUrl(request: NextRequest, path: string[]): string {
   const suffix = path.map(encodeURIComponent).join("/");
@@ -32,38 +34,58 @@ function copyResponseHeaders(upstream: Response): Headers {
   return headers;
 }
 
+async function fetchUpstream(
+  target: string,
+  init: RequestInit,
+): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= PROXY_MAX_ATTEMPTS; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), PROXY_TIMEOUT_MS);
+    try {
+      const response = await fetch(target, {
+        ...init,
+        signal: controller.signal,
+      });
+      return response;
+    } catch (error) {
+      lastError = error;
+      if (attempt < PROXY_MAX_ATTEMPTS) {
+        await new Promise((resolve) => setTimeout(resolve, PROXY_RETRY_MS));
+        continue;
+      }
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  throw lastError;
+}
+
 async function proxy(request: NextRequest, path: string[]): Promise<NextResponse> {
   const target = buildTargetUrl(request, path);
   const method = request.method.toUpperCase();
   const hasBody = method !== "GET" && method !== "HEAD";
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), PROXY_TIMEOUT_MS);
+  const init: RequestInit = {
+    method,
+    headers: forwardRequestHeaders(request),
+    redirect: "manual",
+    cache: "no-store",
+  };
 
-  try {
-    const init: RequestInit = {
-      method,
-      headers: forwardRequestHeaders(request),
-      redirect: "manual",
-      cache: "no-store",
-      signal: controller.signal,
-    };
-
-    if (hasBody) {
-      init.body = await request.arrayBuffer();
-    }
-
-    const upstream = await fetch(target, init);
-    const responseHeaders = copyResponseHeaders(upstream);
-
-    return new NextResponse(upstream.body, {
-      status: upstream.status,
-      statusText: upstream.statusText,
-      headers: responseHeaders,
-    });
-  } finally {
-    clearTimeout(timeout);
+  if (hasBody) {
+    init.body = await request.arrayBuffer();
   }
+
+  const upstream = await fetchUpstream(target, init);
+  const responseHeaders = copyResponseHeaders(upstream);
+
+  return new NextResponse(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: responseHeaders,
+  });
 }
 
 type RouteContext = { params: Promise<{ path: string[] }> };
@@ -79,13 +101,18 @@ async function handle(
   try {
     return await proxy(request, path);
   } catch (error) {
-    const message =
+    const detail =
       error instanceof Error && error.name === "AbortError"
-        ? "API 요청 시간이 초과되었습니다. 잠시 후 다시 시도해주세요."
+        ? "API 요청 시간이 초과되었습니다."
         : error instanceof Error
           ? error.message
           : "API proxy failed";
-    return NextResponse.json({ message }, { status: 502 });
+    return NextResponse.json(
+      {
+        message: `${detail} (mem-api가 슬립 중이면 1분 후 다시 시도하세요.)`,
+      },
+      { status: 502 },
+    );
   }
 }
 
