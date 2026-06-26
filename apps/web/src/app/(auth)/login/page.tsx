@@ -21,7 +21,7 @@ export default function LoginPage() {
     setPending(true);
     try {
       await login(email.trim(), password);
-      router.push(postLoginPath());
+      router.replace(postLoginPath());
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "로그인에 실패했습니다.");

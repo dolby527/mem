@@ -70,14 +70,32 @@ export class AuthService {
       name: user.name,
       role: user.role,
       avatarUrl: user.avatarUrl,
-      hospital: user.hospital,
+      hospital: {
+        id: user.hospital.id,
+        slug: user.hospital.slug,
+        name: user.hospital.name,
+      },
     };
   }
+
+  private readonly authUserSelect = {
+    id: true,
+    email: true,
+    name: true,
+    role: true,
+    avatarUrl: true,
+    hospitalId: true,
+    hospital: { select: { id: true, slug: true, name: true } },
+  } as const;
 
   async login(email: string, password: string) {
     const user = await this.prisma.user.findUnique({
       where: { email: email.trim() },
-      include: { hospital: true },
+      select: {
+        ...this.authUserSelect,
+        password: true,
+        deletedAt: true,
+      },
     });
     if (!user || user.deletedAt) {
       throw new UnauthorizedException("이메일 또는 비밀번호가 일치하지 않습니다.");
@@ -189,7 +207,7 @@ export class AuthService {
           role: invite.role,
           hospitalId: invite.hospitalId,
         },
-        include: { hospital: true },
+        select: this.authUserSelect,
       });
       await tx.invite.update({
         where: { id: invite.id },
@@ -236,7 +254,7 @@ export class AuthService {
           role: UserRole.HOSPITAL_ADMIN,
           hospitalId: h.id,
         },
-        include: { hospital: true },
+        select: this.authUserSelect,
       });
       return { hospital: h, user: u };
     });
@@ -281,7 +299,7 @@ export class AuthService {
           role: UserRole.PLATFORM_ADMIN,
           hospitalId: hospital.id,
         },
-        include: { hospital: true },
+        select: this.authUserSelect,
       });
     });
     return {

@@ -2,6 +2,9 @@
 export function resolveApiInternalUrl(): string {
   const raw = process.env.API_INTERNAL_URL?.trim();
   if (!raw) {
+    if (process.env.NODE_ENV !== "production") {
+      return "http://localhost:3001";
+    }
     throw new Error(
       "API_INTERNAL_URL is not set on mem-web (set to mem-api public URL).",
     );

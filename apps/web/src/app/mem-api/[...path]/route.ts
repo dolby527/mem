@@ -24,10 +24,14 @@ function forwardRequestHeaders(request: NextRequest): Headers {
 }
 
 function copyResponseHeaders(upstream: Response): Headers {
-  const headers = new Headers(upstream.headers);
-  headers.delete("content-encoding");
-  // Fetch merges Set-Cookie; re-append each cookie for browser auth.
-  headers.delete("set-cookie");
+  const headers = new Headers();
+  const contentType = upstream.headers.get("content-type");
+  if (contentType) headers.set("content-type", contentType);
+  const cacheControl = upstream.headers.get("cache-control");
+  if (cacheControl) headers.set("cache-control", cacheControl);
+  // Do not forward content-length / transfer-encoding / content-encoding — fetch may
+  // decompress the body while upstream headers still describe the compressed stream,
+  // which truncates JSON (e.g. login at ~395 bytes).
   for (const cookie of upstream.headers.getSetCookie()) {
     headers.append("set-cookie", cookie);
   }
@@ -80,8 +84,13 @@ async function proxy(request: NextRequest, path: string[]): Promise<NextResponse
 
   const upstream = await fetchUpstream(target, init);
   const responseHeaders = copyResponseHeaders(upstream);
+  // Buffer body — streaming upstream.body can truncate JSON (e.g. login + Set-Cookie).
+  const body =
+    upstream.status === 204 || upstream.status === 304
+      ? null
+      : await upstream.arrayBuffer();
 
-  return new NextResponse(upstream.body, {
+  return new NextResponse(body, {
     status: upstream.status,
     statusText: upstream.statusText,
     headers: responseHeaders,

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { verifyAccessToken } from "@/lib/auth/verifyAccessToken";
 import { getApiBaseUrl } from "./config";
+import { parseJsonText } from "./parse-json-response";
 
 function buildCookieHeader(
   cookieStore: Awaited<ReturnType<typeof cookies>>,
@@ -53,5 +54,9 @@ export async function serverCookieFetch<T>(
   if (response.status === 204) return undefined as T;
   const text = await response.text();
   if (!text) return null as T;
-  return JSON.parse(text) as T;
+  const parsed = parseJsonText<T>(text);
+  if (parsed == null) {
+    throw new Error("서버 응답을 처리하지 못했습니다.");
+  }
+  return parsed;
 }

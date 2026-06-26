@@ -1,13 +1,36 @@
 import type { AuthUser } from "@/types/auth";
 import { getApiBaseUrl } from "./config";
+import { parseJsonText, parseJsonTextOrThrow } from "./parse-json-response";
+import { getUserApi } from "./user.api";
+
+const MALFORMED_RESPONSE =
+  "서버 응답을 처리하지 못했습니다. 잠시 후 다시 시도해주세요.";
+
+async function readResponseText(response: Response): Promise<string> {
+  return response.text();
+}
 
 async function throwAuthError(response: Response, fallback: string): Promise<never> {
-  const errorData = (await response.json().catch(() => ({}))) as {
-    message?: string | string[];
-  };
+  const text = await readResponseText(response);
+  const errorData = parseJsonText<{ message?: string | string[] }>(text) ?? {};
   const msg = errorData.message;
-  const text = Array.isArray(msg) ? msg.join(" ") : (msg ?? fallback);
-  throw new Error(text);
+  const detail = Array.isArray(msg) ? msg.join(" ") : (msg ?? fallback);
+  throw new Error(detail);
+}
+
+async function resolveUserAfterAuth(
+  response: Response,
+): Promise<AuthUser> {
+  const text = await readResponseText(response);
+  const result = parseJsonText<{ user: AuthUser }>(text);
+  if (result?.user) return result.user;
+
+  // Set-Cookie may succeed even when the proxied JSON body was truncated.
+  try {
+    return await getUserApi();
+  } catch {
+    throw new Error(MALFORMED_RESPONSE);
+  }
 }
 
 export async function loginApi(email: string, password: string): Promise<AuthUser> {
@@ -24,13 +47,15 @@ export async function loginApi(email: string, password: string): Promise<AuthUse
     if (!response.ok) {
       await throwAuthError(response, "로그인에 실패했습니다");
     }
-    const result = (await response.json()) as { user: AuthUser };
-    return result.user;
+    return resolveUserAfterAuth(response);
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
       throw new Error(
         "서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해주세요. (Render 무료 플랜은 깨우는 데 1분 가까이 걸릴 수 있습니다)",
       );
+    }
+    if (error instanceof SyntaxError) {
+      throw new Error(MALFORMED_RESPONSE);
     }
     throw error;
   } finally {
@@ -63,7 +88,8 @@ export async function getInviteInfoApi(inviteId: string): Promise<InviteInfo> {
   if (!response.ok) {
     await throwAuthError(response, "초대 정보를 불러오지 못했습니다");
   }
-  return response.json() as Promise<InviteInfo>;
+  const text = await readResponseText(response);
+  return parseJsonTextOrThrow<InviteInfo>(text, "초대 정보 응답을 처리하지 못했습니다.");
 }
 
 export async function signUpInviteApi(data: {
@@ -80,8 +106,7 @@ export async function signUpInviteApi(data: {
   if (!response.ok) {
     await throwAuthError(response, "회원가입에 실패했습니다");
   }
-  const result = (await response.json()) as { user: AuthUser };
-  return result.user;
+  return resolveUserAfterAuth(response);
 }
 
 export async function signUpHospitalApi(data: {

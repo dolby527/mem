@@ -1,4 +1,5 @@
 import { getApiBaseUrl, getHospitalSlug } from "./config";
+import { parseJsonText } from "./parse-json-response";
 
 export type SessionExpiredHandler = () => void;
 
@@ -11,13 +12,13 @@ export function setSessionExpiredHandler(handler: SessionExpiredHandler | null) 
 async function parseErrorMessage(response: Response): Promise<string> {
   const text = await response.text();
   if (!text) return `HTTP error! status: ${String(response.status)}`;
-  try {
-    const data = JSON.parse(text) as { message?: string | string[] };
+  const data = parseJsonText<{ message?: string | string[] }>(text);
+  if (data) {
     const msg = data.message;
     if (Array.isArray(msg)) return msg.join(" ");
     if (msg) return msg;
-  } catch {
-    if (text.length < 200) return text;
+  } else if (text.length < 200) {
+    return text;
   }
   return `HTTP error! status: ${String(response.status)}`;
 }
@@ -81,5 +82,9 @@ export async function cookieFetch<T>(
   if (response.status === 204) return undefined as T;
   const text = await response.text();
   if (!text) return null as T;
-  return JSON.parse(text) as T;
+  const parsed = parseJsonText<T>(text);
+  if (parsed == null) {
+    throw new Error("서버 응답을 처리하지 못했습니다. 잠시 후 다시 시도해주세요.");
+  }
+  return parsed;
 }
